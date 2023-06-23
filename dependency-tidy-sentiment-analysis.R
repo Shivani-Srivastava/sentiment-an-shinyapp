@@ -16,11 +16,12 @@ try(require("DT")||install.packages("DT"))
 try(require("reshape2")||install.packages("reshape2"))
 try(require("wordcloud")||install.packages("wordcloud"))
 try(require("plotly")||install.packages("plotly"))
-
+try(require("sentimentr")||install.packages("sentimentr"))
 try(require("tidytext")||install_github("juliasilge/tidytext"))
 try(require("tidytext")||install.packages("tidytext"))
 
 library("shiny")
+library("sentimentr")
 library("tidytext")
 library("tidyr")
 library("dplyr")
