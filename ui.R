@@ -99,7 +99,14 @@ shinyUI(fluidPage(
                          br(),
                          h4("Document parsed into sentences and sentiment score for each sentence"),
                          # downloadButton('downloadData4', 'Downlaod Sentiemnt Scores (Works only in browser)'), br(),br(),
-                         dataTableOutput("table2"))
+                         dataTableOutput("table2")),
+			          tabPanel("Valence Shifters", br(),
+			                   dataTableOutput("ValencesShifted")
+			            
+			          )
+			          #tabPanel("Sentiment Scores", br(),
+			         #          dataTableOutput("Scores_by_Lexicon")
+			          #         )
                 #                         
                          )
                 )
