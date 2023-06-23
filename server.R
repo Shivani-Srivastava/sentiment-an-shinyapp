@@ -11,6 +11,7 @@ library("DT")
 library("reshape2")
 library("wordcloud")
 library("plotly")
+library("sentimentr")
 
 #--------------------------------------------#
 
@@ -50,6 +51,19 @@ lexicon_data<-read.csv('sentiments.csv',stringsAsFactors=FALSE)# read lexcicons 
     }
     return(textdf)
       })
+  
+    output$ValencesShifted <- renderDataTable({
+      datum <- sentimentr::get_sentences(dataset()$text)
+      a0 <- sentimentr::extract_sentiment_terms(datum)
+      b0 <- sentimentr::sentiment(datum)
+      a00 <- data.frame(a0, b0[,4])
+      return(a00)
+      #dataset()
+    }, options = list(aLengthMenu = c(10, 30, 50), iDisplayLength = 5, bSortClasses = TRUE,
+                    bAutoWidth = FALSE,
+                    aoColumn = list(list(sWidth = "150px", sWidth = "30px",
+                                         sWidth = "30px", sWidth = "30px"))
+    ))
   
     stopw = reactive({
         # input = list(stopw = "have had samsung")
@@ -425,7 +439,9 @@ lexicon_data<-read.csv('sentiments.csv',stringsAsFactors=FALSE)# read lexcicons 
     datatable(t2(), rownames = F)
   }, options = list(lengthMenu = c(5, 30, 50), pageLength = 30))
   
-  
+  output$Scores_by_Lexicon <- renderDataTable({
+    return(sentiments_cdf())
+  })
 
   #----------------------------------------------------#
   
